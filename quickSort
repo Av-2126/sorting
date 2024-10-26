@@ -1,0 +1,36 @@
+// Choose a pivot.
+// Send all elements lesser than or equal to pivot on left and greater than pivot on right.
+// Now place the pivot on its right position
+// This is repeated recursively to get a final, fully sorted array of integers.
+public static int partition(int[] A,int s,int e){
+        int pivot = A[s];
+        int i = s;
+        int j = e;
+        while(i < j ){
+            while(A[i] <= pivot){
+                if( i != e) i++;
+                else break;
+            }
+            while(A[j] >= pivot){
+                if(j != s) j--;
+                else break;
+            }
+            if(i < j){
+                int temp = A[i];
+                A[i] = A[j];
+                A[j] = temp;
+            }
+        }
+        int temp = A[j];
+        A[j] = A[s];
+        A[s] = temp;
+        
+        return j;
+    }
+    public static void qS(int[] A,int s,int e){
+        if(s < e){
+            int p = partition(A,s,e);
+            qS(A,s,p-1);
+            qS(A,p+1,e);
+        }
+    }
